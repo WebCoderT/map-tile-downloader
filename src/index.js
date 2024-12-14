@@ -20,7 +20,16 @@ function calculateTileNumber(latitude, longitude, zoom) {
   return [tileX, tileY];
 }
 
-async function procesLatlng(jingdu1, weidu1, jingdu2, weidu2, zoom) {
+async function procesLatlng(
+  jingdu1,
+  weidu1,
+  jingdu2,
+  weidu2,
+  zoom,
+  filename,
+  maptype,
+  suffix
+) {
   const tileNumber1 = calculateTileNumber(weidu1, jingdu1, zoom);
   const tileNumber2 = calculateTileNumber(weidu2, jingdu2, zoom);
   console.log("西北角：" + tileNumber1, tileNumber2);
@@ -39,11 +48,11 @@ async function procesLatlng(jingdu1, weidu1, jingdu2, weidu2, zoom) {
     for (let imgNum = tileNumber1[1]; imgNum <= tileNumber2[1]; imgNum++) {
       console.log(
         "\x1b[32m%s\x1b[0m",
-        `正在 拉取 供应商【gaode】【经纬度范围爬取功能】 第 ${
+        `正在 拉取 供应商【${maptype}】【经纬度范围爬取功能】 第 ${
           total + 1
         } 张 瓦片`
       );
-      await checkoutSingle(fileNum, imgNum, zoom, "gaode", "gaode", "jpg");
+      await checkoutSingle(fileNum, imgNum, zoom, filename, maptype, suffix);
       console.log("\x1b[32m%s\x1b[0m", `第 ${total + 1} 张拉取完成。`);
       total += 1;
       console.log("\x1b[32m%s\x1b[0m", `剩余 ${all - total} 张。`);
@@ -63,7 +72,6 @@ const _download = async function (x, y, z, filename, maptype) {
   var url = URL[maptype].format({ x: x, y: y, z: z, s: random(1, 4) });
   var pathname = path.dirname(filename);
   mkdirsSync(pathname);
-  console.log(pathname, "-------------");
   if (!fs.existsSync(filename)) {
     console.log("开始下载：", pathname);
     await request(
@@ -74,8 +82,7 @@ const _download = async function (x, y, z, filename, maptype) {
       },
       (err, response) => {
         if (err) {
-          console.log(err);
-          return err;
+          throw new Error(`出现异常，在${x}${y}${z}`);
         }
         fs.writeFileSync(filename, response.body, "binary");
       }
@@ -86,7 +93,6 @@ const random = function (start, end) {
   return Math.floor(Math.random() * (end - start + 1)) + start;
 };
 const checkoutSingle = async function (x, y, z, filename, maptype, suffix) {
-  console.log(1);
   var pathname = `tiles/{filename}/{z}/{x}/{y}.${suffix}`.format({
     x: x,
     y: y,
@@ -94,31 +100,20 @@ const checkoutSingle = async function (x, y, z, filename, maptype, suffix) {
     filename: filename,
   });
   var abspath = path.resolve(pathname);
-  console.log(abspath);
-  // return new Promise((resolve, reject) => {
   if (!fs.existsSync(abspath)) {
-    console.log("11");
     await _download(x, y, z, pathname, maptype);
   } else {
-    console.log("111");
     fs.stat(abspath, async function (err, stats) {
-      console.log("1111");
       if (err) {
-        console.log("11111");
         await _download(x, y, z, pathname, maptype);
-        // reject(err);
         return;
       }
       if (!stats.size) {
-        console.log("1111111");
         fs.unlinkSync(path);
         await _download(x, y, z, pathname, maptype);
       }
-      console.log("2");
     });
   }
-  // resolve();
-  // });
 };
 
 String.prototype.format = function (json) {
@@ -151,4 +146,13 @@ const mkdirsSync = function (dirpath, mode) {
   return true;
 };
 
-procesLatlng(113.993693, 32.189696, 114.291078, 32.056366, 18);
+procesLatlng(
+  113.993693,
+  32.189696,
+  114.291078,
+  32.056366,
+  18,
+  "tdt",
+  "tianditu_img",
+  "jpg"
+);

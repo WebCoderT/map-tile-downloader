@@ -6,10 +6,10 @@ const config = {
     gaode:
       "http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}",
     tianditu_img:
-      "http://t{s}.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=62147d72236f51ff10c1926f1f0fd4b7",
+      "http://t{s}.tianditu.gov.cn/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=tk",
     tianditu_cia:
-      "http://t{s}.tianditu.gov.cn/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=62147d72236f51ff10c1926f1f0fd4b7"
-  }
+      "http://t{s}.tianditu.gov.cn/DataServer?T=cia_w&x={x}&y={y}&l={z}&tk=tk",
+  },
 };
 
 module.exports = config;
