@@ -1,23 +1,22 @@
 {
-  "name": "map-download",
+  "name": "map-tile-downloader",
   "version": "1.0.0",
   "description": "A map downloader based on nodejs",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ShareQiu1994/node-map-download.git"
-  },
-  "author": "shareQiu1994",
+  "author": "tzzzzzz.",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ShareQiu1994/node-map-download/issues"
-  },
-  "homepage": "https://github.com/ShareQiu1994/node-map-download#readme",
   "dependencies": {
+    "@turf/turf": "^6.5.0",
+    "mars3d": "^3.8.10",
+    "mars3d-cesium": "^1.124.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1"
   }
 }

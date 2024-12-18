@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map tiles downloader</title>
+</head>
+
+<body>
+    ddds1
+
+    <script>
+        console.log(window.onload)
+        const javascripts = ['./index.js']
+        javascripts.forEach(javascript => {
+            const script = document.createElement('script')
+            script.src = `${javascript}?timestamp=${new Date().getTime()}`
+            document.head.appendChild(script)
+        })
+    </script>
+
+    <script>
+        procesLatlng(
+            113.993693,
+            32.189696,
+            114.291078,
+            32.056366,
+            1,
+            "tdt",
+            "tianditu_img",
+            "jpg"
+        );
+
+    </script>
+</body>
+
+</html>
