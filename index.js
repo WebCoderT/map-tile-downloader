@@ -4,10 +4,6 @@ const request = require("request-promise");
 const headers = require("./src/utils/headers");
 const { URL } = require("./src/config/config");
 
-const mars3d = require('mars3d')
-
-console.log(mars3d)
-
 function calculateTileNumber(latitude, longitude, zoom) {
   var numTiles = 1 << zoom;
   var tileX = Math.floor(((longitude + 180) / 360) * numTiles);
@@ -15,11 +11,11 @@ function calculateTileNumber(latitude, longitude, zoom) {
     ((1 -
       Math.log(
         Math.tan((latitude * Math.PI) / 180) +
-        1 / Math.cos((latitude * Math.PI) / 180)
+          1 / Math.cos((latitude * Math.PI) / 180)
       ) /
-      Math.PI) /
+        Math.PI) /
       2) *
-    numTiles
+      numTiles
   );
   return [tileX, tileY];
 }
@@ -48,8 +44,6 @@ const checkoutSingle = async function (x, y, z, filename, maptype, suffix) {
   }
 };
 
-
-
 const _download = async function (x, y, z, filename, maptype) {
   var url = URL[maptype].format({ x: x, y: y, z: z, s: random(1, 4) });
   var pathname = path.dirname(filename);
@@ -74,7 +68,6 @@ const _download = async function (x, y, z, filename, maptype) {
 const random = function (start, end) {
   return Math.floor(Math.random() * (end - start + 1)) + start;
 };
-
 
 String.prototype.format = function (json) {
   var temp = this;
@@ -106,7 +99,6 @@ const mkdirsSync = function (dirpath, mode) {
   return true;
 };
 
-
 async function procesLatlng(
   jingdu1,
   weidu1,
@@ -135,7 +127,8 @@ async function procesLatlng(
     for (let imgNum = tileNumber1[1]; imgNum <= tileNumber2[1]; imgNum++) {
       console.log(
         "\x1b[32m%s\x1b[0m",
-        `正在 拉取 供应商【${maptype}】【经纬度范围爬取功能】 第 ${total + 1
+        `正在 拉取 供应商【${maptype}】【经纬度范围爬取功能】 第 ${
+          total + 1
         } 张 瓦片`
       );
       await checkoutSingle(fileNum, imgNum, zoom, filename, maptype, suffix);
