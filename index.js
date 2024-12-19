@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const request = require("request-promise");
-const headers = require("./src/utils/headers");
-const { URL } = require("./src/config/config");
+const headers = require("./utils/headers");
+const { URL } = require("./config/config");
 
 function calculateTileNumber(latitude, longitude, zoom) {
   var numTiles = 1 << zoom;

@@ -5,11 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>map tiles downloader</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 
-<body>
-    ddds12
-    <p id="info"></p>
+<body class="p-2">
+    <h1>地图工具包</h1>
+    <h4>地图瓦片下载器（经纬度范围）</h4>
+    <div class="row m-0">
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput" class="form-label">西北角经度</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="西北角经度">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput2" class="form-label">西北角纬度</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="西北角纬度">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput" class="form-label">东南角经度</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="东南角经度">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput2" class="form-label">东南角纬度</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="东南角纬度">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput2" class="form-label">瓦片下载开始等级</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="瓦片下载开始等级">
+        </div>
+        <div class="col-6 mb-3">
+            <label for="formGroupExampleInput2" class="form-label">瓦片下载结束等级</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="瓦片下载结束等级">
+        </div>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary">计算下载量</button>
+            <button type="button" class="btn btn-success">开始下载</button>
+            <button type="button" class="btn btn-danger">暂停下载</button>
+        </div>
+    </div>
+    <p id="info" class="p-2"></p>
     <script src="./renderer.js"></script>
     <script>
         const javascripts = ['./index.js']
